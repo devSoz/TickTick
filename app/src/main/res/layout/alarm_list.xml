@@ -13,6 +13,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="Text"/>
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:text="Cancel"
+/>
     <TextView
         android:id="@+id/tvADate"
         android:layout_width="wrap_content"
@@ -31,5 +38,6 @@
         android:layout_marginStart="20dp"
         android:id="@+id/swNotify"
         android:text="On"/>
+
 </LinearLayout>
 </LinearLayout>

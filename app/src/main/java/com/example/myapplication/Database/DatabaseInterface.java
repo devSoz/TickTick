@@ -23,11 +23,14 @@ import java.util.List;
         @Delete
         void delete(EventData model);
 
-        @Query("DELETE FROM AlarmTable WHERE time = :eTime")
-        void deleteByTime(String eTime);
+        @Query("DELETE FROM AlarmTable WHERE id = :eId")
+        void deleteById(Integer eId);
 
         @Query("select * from AlarmTable ORDER BY id ASC")
         List<EventData> getAlarmList();
+
+        @Query("select * from AlarmTable WHERE time = :time")
+        EventData getAlarm(Long time);
 
         //@Query("SELECT * FROM FaveDoge ORDER BY id ASC")
         //LiveData<List<favDoge>> getFavDoge();

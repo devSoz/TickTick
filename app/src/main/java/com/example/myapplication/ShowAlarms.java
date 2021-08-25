@@ -29,7 +29,13 @@ public class ShowAlarms extends AppCompatActivity {
         alarmListView = findViewById(R.id.listview);
         btnNew = (Button) findViewById(R.id.btnNew) ;
         createNewAlarm();
+
+    }
+
+    @Override
+    protected void onResume() {
         showAlarms();
+        super.onResume();
     }
 
     public void createNewAlarm()
@@ -45,13 +51,12 @@ public class ShowAlarms extends AppCompatActivity {
 
     public void showAlarms()
     {
+        alarmList.clear();
         createDb = CreateDatabase.getInstance(this);
         dao = createDb.Dao();
         alarmList =  dao.getAlarmList();
 
         adapterAlarms = new AdapterAlarms(alarmList, this);
         alarmListView.setAdapter(adapterAlarms);
-        //recyclerView.setAdapter(new adapterFavDoge(favDogeList, R.layout.fave_doge, this));
-        //recyclerView.setAdapter(adapterFavDog);
     }
 }
