@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.example.myapplication.Database.DatabaseInterface;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -45,7 +46,7 @@ public class AdapterAlarms extends BaseAdapter {
     List<EventData> alarmList = new ArrayList<>();
     TextView tvName, tvDate, tvTime;
     Switch swNotify;
-    Button btnCancel;
+    ImageButton btnCancel;
     ListView listView;
     private CreateDatabase createDb;
     private DatabaseInterface dao;
@@ -75,6 +76,7 @@ public class AdapterAlarms extends BaseAdapter {
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         //String.format("%02d:%02d"
+
         final View V = LayoutInflater.from(context).inflate(R.layout.alarm_list, viewGroup, false);
         ((TextView) V.findViewById(R.id.tvAName)).setText(alarmList.get(i).getEventName());
         long milliseconds = alarmList.get(i).getTime();
@@ -89,7 +91,7 @@ public class AdapterAlarms extends BaseAdapter {
             ((Switch) V.findViewById(R.id.swNotify)).setChecked(true);
         else
             ((Switch) V.findViewById(R.id.swNotify)).setChecked(false);*/
-        btnCancel = (Button) V.findViewById(R.id.btnCancel);
+        btnCancel = (ImageButton) V.findViewById(R.id.btnCancel);
         //listView = view.findViewById(R.id.listview);
         btnCancel.setTag(i);
         (btnCancel).setOnClickListener(new View.OnClickListener() {
@@ -118,6 +120,36 @@ public class AdapterAlarms extends BaseAdapter {
         });
         return V;
     }
+
+
+    public static void compareDates(String d1,String d2)
+    {
+        try{
+           int i=0;
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date1 = sdf.parse(d1);
+            Date date2 = sdf.parse(d2);
+
+
+            if(date1.after(date2)){
+               i=1;
+            }
+            // before() will return true if and only if date1 is before date2
+            if(date1.before(date2)){
+                i=0;
+            }
+
+            //equals() returns true if both the dates are equal
+            if(date1.equals(date2)){
+
+            }
+
+        }
+        catch(ParseException ex){
+            ex.printStackTrace();
+        }
+    }
+
 
     public void deleteAlarm(Integer uniqueId, int position)
     {
